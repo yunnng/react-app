@@ -1,0 +1,17 @@
+{
+    "deploy": {
+        "production": {
+            "user": "ubuntu",
+            "host": ["118.89.39.58"],
+            "port": "1994",
+            "ref": "origin/master",
+            "repo": "git@github.com:y19942026/react-app.git",
+            "path": "/home/ubuntu/deploy/react-app",
+            "post-deploy": "npm run build && rm -rf ../../express-server/current/public/build && mv build ../../express-server/current/public/",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}
