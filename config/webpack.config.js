@@ -27,6 +27,10 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const eslint = require('eslint');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const manifest = require('./dll/vendor-manifest.json')
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasureWebpackPlugin();
+
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -138,7 +142,8 @@ module.exports = function(webpackEnv) {
     return loaders;
   };
 
-  return {
+  return smp.wrap({
+    stats: 'detailed',
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
@@ -520,6 +525,10 @@ module.exports = function(webpackEnv) {
     },
     plugins: [
       new BundleAnalyzerPlugin(),
+      new webpack.DllReferencePlugin({
+        context: __dirname,
+        manifest,
+      }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -678,5 +687,5 @@ module.exports = function(webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
-  };
+  });
 };

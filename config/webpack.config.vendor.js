@@ -1,14 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const vendor = ['react', 'lodash-es']
+const vendor = ['react', 'react-dom']
 
 module.exports = {
   entry: {
     vendor,
   },
   output: {
-    path: path.join(__dirname, 'dll', 'dist-[hash]'),
+    path: path.join(__dirname, 'dll'),
     filename: '[name].js',
     library: '[name]',
   },
