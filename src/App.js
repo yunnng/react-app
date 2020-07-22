@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import set from 'lodash'
+import { set, get } from 'lodash-es'
 import './App.css';
 
 const testParam = {
@@ -9,6 +9,8 @@ const testParam = {
 }
 function App() {
   const onchange = () => {
+    const age = get(testParam, 'age')
+    console.log('age ---', age)
     set(testParam, 'name', 'snow')
   }
   return (
