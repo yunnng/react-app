@@ -1,13 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
+import set from 'lodash'
 import './App.css';
 
+const testParam = {
+  name: 'tate',
+  age: 18,
+}
 function App() {
+  const onchange = () => {
+    set(testParam, 'name', 'snow')
+  }
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p onClick={onchange}>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a

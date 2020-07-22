@@ -34,6 +34,8 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.0",
+    "lodash": "^4.17.19",
+    "lodash-es": "^4.17.15",
     "mini-css-extract-plugin": "0.8.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.5.0",
@@ -62,7 +64,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "build:dll": "webpack -p --progress --config config/webpack.config.vendor.js",
+    "test": "node scripts/test.js",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -131,5 +135,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
